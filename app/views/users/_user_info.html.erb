@@ -1,0 +1,43 @@
+<div class="row-fluid">
+  <div class="span3">
+    <%= image_tag avatar_url(user, size: 160), class: "img-polaroid" %>
+  </div>
+  <div class="span9">
+    <dl>
+      <dt>Name</dt>
+      <dd><%= user.name %></dd>
+      <% if current_user == user %>
+        <dt>Email</dt>
+        <dd><%= user.email %></dd>
+      <% end %>
+      <dt>Role</dt>
+      <dd><%= user.role.capitalize rescue "Regular user" %></dd>
+      <dt>Authentications</dt>
+      <% if user.authentications.any? %>
+        <dd>
+          <%= user.authentications.collect(&:provider).join(", ") %>
+        </dd>
+      <% end %>
+    </dl>
+  </div>
+</div>
+
+<hr />
+
+<% if can? :ban, @user %>
+  <% if @user.banned? %>
+    <%= link_to "Unban", unban_user_path(user), method: :patch, class: "btn btn-danger",
+      data: { confirm: "Are you sure?" }, 'data-confirm-title' => "Unban User: #{truncate(user.name_or_email, length: 20)}?" %>
+  <% else %>
+    <%= link_to "Ban!", ban_user_path(user), method: :patch, class: "btn btn-danger",
+      data: { confirm: "Are you sure?" }, 'data-confirm-title' => "Ban User: #{truncate(user.name_or_email, length: 20)}?" %>
+  <% end %>
+  <hr />
+<% end %>
+
+<div class="row-fluid">
+  <div class="span12">
+  </div>
+</div>
+
+<%= render partial: 'users/comments', locals: { user: user } %>

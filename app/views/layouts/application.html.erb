@@ -1,14 +1,92 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>JiriCharaBlog</title>
+  <title>Jiri Chara</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
+
 <body>
+  <div class="container">
+    <div id="spinner" class="alert alert-info">
+      Loading..
+    </div>
 
-<%= yield %>
+    <div class="row">
+      <div class="span5">
+        <%= link_to root_path, title: "Jiří Chára" do %>
+          <h1 class="logo">
+            <%= image_tag("/assets/logo.png") %>
+            <small><em>Just another blog</em></small>
+          </h1>
+        <% end %>
+      </div>
+      <div class="span7 nav-container">
+        <%= render 'partials/navbar' %>
+        <% if current_user.present? %>
+          <p class="sign-in-text muted">
+            <small>
+              Signed in as <%= current_user.name_or_email %>
+              <% if current_user.role.present? %>
+                <span class="label<%= " label-warning" if current_user.admin? %>">
+                  <%= current_user.role.capitalize %>
+                </span>
+              <% end %>
+            </small>
+          </p>
+        <% end %>
+      </div>
+    </div>
+    <hr />
 
+    <div id="flash_messages">
+      <%= render 'partials/flash_message' %>
+    </div>
+
+    <div class="row">
+      <div class="main-container span9">
+        <%= yield %>
+      </div>
+      <div class="span3">
+        <div class="side-content">
+          <div class="categories">
+            <h4>Categories</h4>
+            <ul class="nav unstyled">
+              <% Tag.all.each do |tag| %>
+                <% if @tag && @tag == tag %>
+                  <li class="disabled">
+                    <%= link_to root_path do %>
+                      <%= tag.display_name %>
+                      <i class="icon-remove"></i>
+                    <% end %>
+                  <% else %>
+                    <li>
+                      <%= link_to root_path(tag_id: tag) do %>
+                        <%= tag.display_name %>
+                      <% end %>
+                    </li>
+                  <% end %>
+                <% end %>
+              </ul>
+            </div>
+
+            <div class="about">
+              <%# render_cell(:about_side, :show) %>
+            </div>
+
+            <div class="social">
+              <h4>Github</h4>
+              <%= link_to "@JiriChara", "https://github.com/JiriChara" %>
+            </div>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <p class="muted">
+      Copyright © <%= Date.today.year %> Jiří Chára. All Rights Reserved.
+    </p>
+  </div>
 </body>
 </html>

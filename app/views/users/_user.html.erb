@@ -1,0 +1,19 @@
+<tr>
+  <td><%= link_to user.id, user %></td>
+  <td><%= user.email %></td>
+  <td><%= user.name %></td>
+  <td><%= user.role.capitalize rescue "Regular user" %></td>
+  <td>
+    <% if can?(:ban, user) && !user.admin? %>
+      <% if user.banned? %>
+        <%= link_to "Unban", unban_user_path(user), method: :put, class: "btn btn-mini btn-danger",
+          confirm: "Are you sure?", 'data-confirm-title' => "Unban User: #{truncate(user.name_or_email, length: 20)}?" %>
+      <% else %>
+        <%= link_to "Ban!", ban_user_path(user), method: :put, class: "btn btn-mini btn-danger",
+          confirm: "Are you sure?", 'data-confirm-title' => "Ban User: #{truncate(user.name_or_email, length: 20)}?" %>
+      <% end %>
+    <% else %>
+        -
+    <% end %>
+  </td>
+</tr>

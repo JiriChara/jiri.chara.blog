@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
   before_save { |user| user.email = user.email.downcase }
   before_save :create_remember_token
 
+  before_create :set_slug
+
   def admin?
     role == "admin"
   end
@@ -38,6 +40,10 @@ class User < ActiveRecord::Base
     name || email
   end
 
+  def to_param
+    slug
+  end
+
   class << self
     def from_omniauth(omniauth)
       auth = Authentication.find_or_create_by(
@@ -53,6 +59,15 @@ class User < ActiveRecord::Base
       auth.user = user; auth.save
 
       user
+    end
+  end
+
+private
+  def set_slug
+    if self.name.present?
+      self.slug = name.parameterize
+    else
+      self.slug = SecureRandom.hex
     end
   end
 end

@@ -3,12 +3,16 @@ require 'karmable'
 class Article < ActiveRecord::Base
   include Karmable
 
+  DEFAULT_PER_PAGE = 5
+
   belongs_to :user
 
   has_many :comments, dependent: :destroy
   has_many :images,   dependent: :destroy
 
   has_and_belongs_to_many :tags
+
+  before_create :set_slug
 
   validates_presence_of :title, :content
 
@@ -19,7 +23,7 @@ class Article < ActiveRecord::Base
   attr_accessor :tag_list
 
   def publish!
-    update(published_at: Time.now)
+    update(published_at: Time.now.utc)
   end
 
   def unpublish!
@@ -36,5 +40,18 @@ class Article < ActiveRecord::Base
 
   def tag_list
     tags.map(&:name).join(',')
+  end
+
+  def to_param
+    slug
+  end
+
+  def author
+    user
+  end
+
+private
+  def set_slug
+    self.slug = title.parameterize
   end
 end

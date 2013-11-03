@@ -1,0 +1,25 @@
+<% if @comment.parent_id.present? %>
+  if($('#comment-<%= @comment.parent_id.to_s %>-form').length > 0) {
+    $('#comment-<%= @comment.parent_id.to_s %>-form').replaceWith('<%=j render(
+      partial: 'comments/form',
+      locals: { comment: @comment, article: @comment.parent.article }) %>', function() {
+      $(this).on('click', '.close-form', function() {
+        $(this).closest('.comment-form-container').fadeOut(function() { $(this).remove() });
+      });
+    });
+  } else {
+    $('#comment-<%= @comment.parent_id.to_s %>').after('<%=j render(
+      partial: 'comments/form',
+      locals: { comment: @comment, article: @comment.parent.article }) %>');
+
+    $('#comment-<%= @comment.parent_id.to_s %>').next().on('click', '.close-form', function() {
+      $(this).closest('.comment-form-container').fadeOut(function() { $(this).remove() });
+    });
+
+    $('#comment-<%= @comment.id.to_s %>').find('textarea').focus();
+  }
+<% else %>
+  $('#comment-form').replaceWith('<%=j render(
+    partial: 'comments/form',
+    locals: { comment: @comment, article: @comment.article }) %>');
+<% end %>

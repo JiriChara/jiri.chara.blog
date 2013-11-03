@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20131101223842) do
 
   create_table "articles", force: true do |t|
     t.string   "title"
+    t.string   "slug"
     t.text     "content"
     t.datetime "published_at"
     t.string   "type"
@@ -45,12 +46,14 @@ ActiveRecord::Schema.define(version: 20131101223842) do
 
   create_table "comments", force: true do |t|
     t.text     "text"
+    t.string   "ancestry"
     t.integer  "user_id"
     t.integer  "article_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "comments", ["ancestry"], name: "index_comments_on_ancestry", using: :btree
   add_index "comments", ["article_id"], name: "index_comments_on_article_id", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
@@ -82,6 +85,7 @@ ActiveRecord::Schema.define(version: 20131101223842) do
 
   create_table "users", force: true do |t|
     t.string   "name"
+    t.string   "slug"
     t.string   "email"
     t.string   "remember_token"
     t.string   "role"

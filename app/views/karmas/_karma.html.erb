@@ -1,0 +1,43 @@
+<span id="karma-<%= object.id %>" class="muted">
+  <% if current_user && object.karmas.where(user: current_user).any? %>
+    <% if object.karmas.where(user: current_user).first.value == 1 %>
+      <%= object.positive_karma unless object.positive_karma == 0 %>
+      <span class="text-success">
+        <i class="icon-chevron-up"></i>
+      </span>
+
+        |
+
+      <%= object.negative_karma unless object.negative_karma == 0 %>
+      <%= link_to karma_path(object: object.class.to_s, id: object.id), method: :delete, remote: true, title: "Remove vote", 'data-toggle' => 'tooltip' do %>
+        <i class="icon-angle-down"></i>
+      <% end %>
+    <% else %>
+        <%= object.positive_karma unless object.positive_karma == 0 %>
+        <%= link_to karma_path(object: object.class.to_s, id: object.id), method: :delete, remote: true, title: "Remove vote", 'data-toggle' => 'tooltip' do %>
+          <i class="icon-angle-up"></i>
+        <% end %>
+
+        |
+
+      <%= object.negative_karma unless object.negative_karma == 0 %>
+      <span class="text-error">
+        <i class="icon-chevron-down"></i>
+      </span>
+    <% end %>
+  <% else %>
+    <% if can? :create, Karma %>
+      <%= object.positive_karma unless object.positive_karma == 0 %>
+      <%= link_to karmas_path(object: object.class.to_s, id: object.id, value: 1), method: :post, remote: true, title: "Vote up", 'data-toggle' => 'tooltip' do %>
+        <i class="icon-angle-up"></i>
+      <% end %>
+
+      |
+
+      <%= object.negative_karma unless object.negative_karma == 0 %>
+      <%= link_to karmas_path(object: object.class.to_s, id: object.id, value: -1), method: :post, remote: true, title: "Vote down", 'data-toggle' => 'tooltip' do %>
+        <i class="icon-angle-down"></i>
+      <% end %>
+    <% end %>
+  <% end %>
+</span>

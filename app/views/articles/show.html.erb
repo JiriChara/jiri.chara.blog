@@ -1,0 +1,52 @@
+<div class="article" id="article-<%= @article.id.to_s %>">
+  <div class="link-back">
+    <%= link_to root_path do %>
+      <i class="icon-long-arrow-left"> Back</i>
+    <% end %>
+  </div>
+
+  <% if can? :read, @article %>
+
+    <%= render partial: 'articles/edit_menu', locals: { article: @article } %>
+
+    <div class="info row">
+      <p class="muted published-at span6">
+        <% if @article.published? %>
+          <small>
+            <%= @article.published_at.strftime("%Y-%m-%d @ %H:%M") %>
+          </small>
+        <% else %>
+          <span class="label label-warning">Unpublished</span>
+        <% end %>
+
+        <% if @article.type != "Article" %>
+          <span class="label label-info"><%= @article.type %></span>
+        <% end %>
+      </p>
+    </div>
+
+    <div class="title">
+      <h3><%= @article.title %></h3>
+    </div>
+
+    <div class="article-content">
+      <%= md @article.content %>
+    </div>
+
+    <p class="text-right">
+      <cite>
+        &#169;
+        <% if @article.published? %>
+          <%= @article.published_at.strftime("%Y-%m-%d") %>,
+        <% else %>
+          <%= @article.updated_at.strftime("%Y-%m-%d") %>,
+        <% end %>
+        <em><%= @article.user.name_or_email %></em>
+      </cite>
+    </p>
+  <% end %>
+
+  <% if @article.published? %>
+    <%= comments_for(@article) %>
+  <% end %>
+</div>

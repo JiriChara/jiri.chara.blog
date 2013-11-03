@@ -1,0 +1,2 @@
+class AboutSide < About
+end

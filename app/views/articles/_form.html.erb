@@ -1,0 +1,55 @@
+<%= form_for @article, url: articles_path do |f| %>
+  <div class="control-group<%= @article.errors.include?(:title) ? " error" : "" %>">
+    <%= f.label :title %>
+    <div class="controls">
+      <%= f.text_field :title %>
+      <% if @article.errors.include?(:title) %>
+        <span class="help-inline"><%= @article.errors[:title].join(', ') %></span>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="control-group<%= @article.errors.include?(:content) ? " error" : "" %>">
+    <%= f.label :content %>
+    <div class="controls">
+      <%= f.text_area :content %>
+      <% if @article.errors.include?(:content) %>
+        <span class="help-inline"><%= @article.errors[:content].join(', ') %></span>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="control-group<%= @article.errors.include?(:tag_list) ? " error" : "" %>">
+    <%= f.label :tag_list %>
+    <div class="controls">
+      <%= f.text_field :tag_list %>
+      <% if @article.errors.include?(:tag_list) %>
+        <span class="help-inline"><%= @article.errors[:tag_list].join(', ') %></span>
+      <% end %>
+    </div>
+  </div>
+
+  <%= f.submit "Save article", class: "btn btn-primary" %>
+<% end %>
+
+<%= form_for Image.new, html: { multipart: true } do |f| %>
+  <%= hidden_field_tag "image[article_id]", @article.id %>
+
+  <%= f.label :image_upload %>
+  <span class="btn btn-success fileinput-button btn-file">
+    <i class="icon-plus icon-white"></i>
+    <span>Add images...</span>
+    <%= f.file_field :image, multiple: true %>
+  </span>
+<% end %>
+
+<div id="article-images">
+  <hr />
+</div>
+
+<script id="template-upload" type="text/x-tmpl">
+  <div class="upload">
+    {%=o.name%}
+    <div class="progress progress-success progress-striped"><div class="bar" style="width: 0%"></div></div>
+  </div>
+</script>

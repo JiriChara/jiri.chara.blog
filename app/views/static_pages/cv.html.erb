@@ -1,0 +1,35 @@
+<% if @cv.present? %>
+  <% if can? :read, @cv %>
+    <div class="article" id="article-<%= @cv.id.to_s %>">
+      <%= render partial: 'articles/edit_menu', locals: { article: @cv } %>
+
+      <div class="info row">
+        <p class="muted published-at span6">
+          <% if @cv.published? %>
+            <small>
+              Publised at: <%= @cv.published_at.strftime("%Y-%m-%d @ %H:%M") %>
+            </small>
+          <% else %>
+            <span class="label label-warning">Unpublished</span>
+          <% end %>
+        </p>
+      </div>
+
+      <div class="title">
+        <h3><%= @cv.title %></h3>
+      </div>
+
+      <div class="article-content">
+        <%= md @cv.content %>
+      </div>
+    </div>
+  <% end %>
+<% else %>
+  <p class="muted">
+    <%= image_tag "/assets/oops.png", class: "img-polaroid" %>
+    Ooops.. Nothing out there!
+    <% if can? :create, Article %>
+      <%= link_to "Create new CV?", new_article_path(type: "Cv") %>
+    <% end %>
+  </p>
+<% end %>

@@ -1,0 +1,29 @@
+<div id="articles-index">
+  <% if can? :create, Article %>
+    <p>
+      <%= link_to "Create new Article?", new_article_path %>
+    </p>
+  <% end %>
+
+  <% if @tag.present? %>
+    <p class="muted">
+      Applied Filters:
+      <span class="label label-info"><%= @tag.display_name %></span>
+    </p>
+  <% end %>
+
+  <% if @articles.any? %>
+    <%= render(partial: "articles/article", collection: @articles) %>
+  <% else %>
+    <p class="muted">
+      <%= image_tag "/assets/oops.png", class: "img-polaroid" %>
+      Ooops.. Nothing out there!
+
+      <% if can? :create, Article %>
+        <%= link_to "Create new article?", new_article_path %>
+      <% end %>
+    </p>
+  <% end %>
+
+  <%= paginate @articles %>
+</div>

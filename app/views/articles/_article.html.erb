@@ -1,0 +1,39 @@
+<% if can? :read, article %>
+  <div class="article" id="article-<%= article.id.to_s %>">
+
+    <%= render partial: 'articles/edit_menu', locals: { article: article } %>
+
+    <div class="info row-fluid">
+      <p class="muted published-at span6">
+        <small>
+          <% if article.published? %>
+            <%= article.published_at.strftime("%Y-%m-%d @ %H:%M") %>
+          <% else %>
+            <span class="label label-warning">Unpublished</span>
+          <% end %>
+        </small>
+      </p>
+
+      <div class="span6">
+        <%= link_to article_path(article, anchor: 'comments'), class: "comments-count pull-right" do %>
+          <small class="pull-right">
+            <i class="icon-comment"></i>
+            <%= "#{article.comments.count} #{'Comment'.pluralize}" %>
+          </small>
+        <% end %>
+      </div>
+    </div>
+
+    <%= link_to article_path(article), class: "title" do %>
+      <h3><%= article.title %></h3>
+    <% end %>
+
+    <div class="article-content">
+      <%= md article.content %>
+    </div>
+
+    <%= link_to article_path(article), class: "read-more" do %>
+      read more &raquo;
+    <% end %>
+  </div>
+<% end %>

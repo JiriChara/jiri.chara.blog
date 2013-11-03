@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-JiriCharaBlog::Application.config.secret_key_base = 'c135d702568426c0b804f34b369ea3de442f0b2ace64ffca64bd778e11572c4f7ffdbd8c6808cf35537806544c57e8e1d2e57043c30e3bb468213aba1bfc3f35'
+JiriCharaBlog::Application.config.secret_key_base = CONFIG[:secret_token]

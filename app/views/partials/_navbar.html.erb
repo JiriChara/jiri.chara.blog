@@ -1,0 +1,59 @@
+<ul class="nav nav-pills pull-right main-nav">
+  <li class="<%= controller_name == "articles" ? "active" : "" %>">
+    <%= link_to root_path do %>
+      <i class="icon-home"></i> Home
+    <% end %>
+  </li>
+  <li class="<%= controller_name == "static_pages" && action_name == "about" ? "active" : "" %>">
+    <%= link_to(about_path) do %>
+      <i class="icon-question"></i> About
+    <% end %>
+  </li>
+  <li class="<%= controller_name == "static_pages" && action_name == "cv" ? "active" : "" %>">
+    <%= link_to(cv_path) do %>
+      <i class="icon-file-text"></i> Curriculum vitae
+    <% end %>
+  </li>
+  <% if current_user && current_user.admin? %>
+    <li class="<%= controller_name == "admin" || (controller_name == "users" && action_name == "index") ? "active" : "" %>">
+      <%= link_to admin_path do %>
+        <i class="icon-cogs"></i> Admin
+      <% end %>
+    </li>
+  <% end %>
+  <% if current_user.present? %>
+    <li class="<%= controller_name == "users" && action_name == "edit" ? "active" : "" %>">
+      <%= link_to edit_user_path(current_user) do %>
+        <i class="icon-user"></i> Profile
+      <% end %>
+    </li>
+    <li>
+      <%= link_to signout_path do %>
+        <i class="icon-signout"></i> Sign out
+      <% end %>
+    </li>
+  <% else %>
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <i class="icon-signin"></i> Sign in <b class="caret"></b>
+      </a>
+      <ul class="dropdown-menu">
+        <li>
+          <%= link_to "/auth/facebook" do %>
+            <i class="icon-facebook-sign"></i> Sign in through facebook
+          <% end %>
+        </li>
+        <li>
+          <%= link_to "/auth/github" do %>
+            <i class="icon-github-sign"></i> Sign in through github
+          <% end %>
+        </li>
+        <li>
+          <%= link_to "/auth/google" do %>
+            <i class="icon-google-plus-sign"></i> Sign in through google
+          <% end %>
+        </li>
+      </ul>
+    </li>
+  <% end %>
+</ul>

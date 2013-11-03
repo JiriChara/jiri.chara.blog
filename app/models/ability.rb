@@ -21,10 +21,22 @@ class Ability
       can :destroy, :session
 
       can :edit,   User, id: user.id
-      can :update, User
+      can :update, User, id: user.id
 
       can :new,    Comment
       can [:edit, :update, :destroy], Comment, user_id: user.id
+
+      if user.moderator?
+        can :create, Article
+
+        can [:edit, :update, :publish, :unpublish, :destroy], Article, author: user
+
+        can [:edit, :update, :destroy], Comment do |comment|
+          comment.author.role != "admin"
+        end
+
+        can [:ban, :unban], User
+      end
 
       if user.admin?
         can :manage, :all

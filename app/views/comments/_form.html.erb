@@ -1,0 +1,63 @@
+<% comment   ||= nil %>
+<% nested    ||= nil %>
+<% not_reply ||= nil %>
+
+<% if nested == true %><div class="nested-comments"><% end %>
+<div id="comment-<%= comment ? "#{not_reply ? comment.id : comment.parent_id}-" : "" %>form" class="comment-form-container">
+  <% if comment.present? %>
+    <div class="row-fluid">
+      <% if not_reply || comment.present? %>
+        <div class="span12">
+          <a href="#comment-<%= comment.id.to_s %>" class="pull-right close-form"><i class="icon-remove-circle"></i></a>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+  <div class="row-fluid">
+    <div class="span1">
+      <% if signed_in? %>
+        <%= image_tag avatar_url(current_user), class: "img-polaroid" %>
+      <% else %>
+        <%= image_tag avatar_url(current_user), class: "img-polaroid" %>
+      <% end %>
+    </div>
+    <div class="span11">
+      <%= form_for(not_reply ? comment : Comment.new, remote: true) do |f| %>
+        <div class="row-fluid">
+          <div class="span12">
+            <% if comment.present? && comment.parent_id %>
+              <%= f.hidden_field :parent_id, value: comment.parent_id %>
+            <% end %>
+
+            <%= f.hidden_field :article_id, value: article.id.to_s %>
+
+            <% if comment && comment.errors.any? && comment.errors.include?(:text) %>
+              <div class="control-group error">
+                <div class="controls">
+                  <%= f.text_area :text, class: "comment-text-area", placeholder: "Leave a message..." %>
+                  <span class="help-inline"><%= comment.errors[:text].join(', ') %></span>
+                </div>
+              </div>
+            </div>
+            <% else %>
+              <%= f.text_area :text,
+                class: "comment-text-area",
+                placeholder: "Leave a message...",
+                autofocus: comment ? true : false
+              %>
+            <% end %>
+
+            <%= link_to '#', class: 'btn btn-primary pull-right create-comment', 'data-submit-form' => true do %>
+              <% if comment && not_reply %>
+                <i class="icon-ok"></i> Save
+              <% else %>
+                <i class="icon-arrow-right"></i> Post it..
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<% if nested == true %></div><% end %>

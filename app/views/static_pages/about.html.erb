@@ -1,0 +1,12 @@
+<% if @about.present? %>
+  <% if can? :read, @about %>
+    <h3><%= @about.title %></h3>
+
+    <%= @about.content %>
+  <% end %>
+<% else %>
+  <p class="muted">
+    <%= image_tag "/assets/oops.png", class: "img-polaroid" %>
+    Ooops.. Nothing out there!
+  </p>
+<% end %>

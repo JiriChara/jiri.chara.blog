@@ -1,0 +1,17 @@
+<h4>About</h4>
+<div class="row-fluid">
+  <div class="span5">
+    <%= image_tag "/assets/avatar.jpg", class: "pull-left img-polaroid avatar" %>
+  </div>
+  <div class="span7">
+    <% if @about_side %>
+      <%= md @about_side.content %>
+    <% else %>
+      <p>
+        My name is Jiri.<br />
+        I write code.
+      </p>
+      <%= link_to "Karlsruhe, Germany", "https://en.wikipedia.org/wiki/Karlsruhe" %>
+    <% end %>
+  </div>
+</div>

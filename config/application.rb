@@ -11,6 +11,10 @@ require "sprockets/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env)
 
+CONFIG = YAML.load(File.read(File.expand_path('../application.yml', __FILE__)))
+CONFIG.merge!(CONFIG.fetch(Rails.env, {}))
+CONFIG.deep_symbolize_keys!
+
 module JiriCharaBlog
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
@@ -24,5 +28,7 @@ module JiriCharaBlog
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
+
+    config.assets.paths << Emoji.images_path
   end
 end

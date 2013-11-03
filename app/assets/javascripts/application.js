@@ -12,5 +12,34 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require twitter/bootstrap
+//= require jquery-fileupload/basic
+//= require jquery-fileupload/vendor/tmpl
 //= require turbolinks
 //= require_tree .
+
+var Spinner = (function() {
+    return {
+        show: function() {
+            $('#spinner').css('top', $(window).scrollTop() + 10);
+            $('#spinner').show();
+        },
+        hide: function() {
+            $('#spinner').hide();
+        }
+    }
+}());
+
+$(function() {
+    // Loader
+    $(document).on("page:fetch", Spinner.show);
+    $(document).on("page:receive", Spinner.hide);
+    $(document).on('click', 'a[data-remote="true"]', Spinner.show);
+    $(document).on('submit', 'form[data-remote="true"]', Spinner.show);
+    $(document).ajaxComplete(Spinner.hide);
+
+    $(document).on('click', '[data-submit-form]', function(e) {
+      e.preventDefault();
+      $(this).closest('form').submit();
+    });
+}());
