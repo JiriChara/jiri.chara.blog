@@ -1,6 +1,12 @@
 class AboutSideCell < Cell::Rails
+  include CanCan::ControllerAdditions
 
-  def show
+  helper MarkdownHelper
+
+  attr_reader :current_user
+
+  def show(args)
+    @current_user = args[:current_user]
     @about_side = AboutSide.actual
     render
   end
