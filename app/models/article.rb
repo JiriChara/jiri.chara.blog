@@ -3,7 +3,7 @@ require 'karmable'
 class Article < ActiveRecord::Base
   include Karmable
 
-  DEFAULT_PER_PAGE       = 5
+  DEFAULT_PER_PAGE       = 3
   DEFAULT_PER_PAGE_TABLE = 30
 
   belongs_to :user

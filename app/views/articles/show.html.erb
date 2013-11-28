@@ -1,7 +1,7 @@
 <div class="article" id="article-<%= @article.id.to_s %>">
   <div class="link-back">
     <%= link_to root_path do %>
-      <i class="icon-long-arrow-left"> Back</i>
+      <i class="icon-long-arrow-left"> back</i>
     <% end %>
   </div>
 
@@ -30,7 +30,7 @@
     </div>
 
     <div class="article-content">
-      <%= md @article.content %>
+      <%= md @article.content, false %>
     </div>
 
     <p class="text-right">

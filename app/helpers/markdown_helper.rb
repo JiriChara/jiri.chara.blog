@@ -8,8 +8,8 @@ module MarkdownHelper
     end
   end
 
-  def md(text)
-    renderer = HTMLwithPygments.new(hard_wrap: true)
+  def md(text, allow_html=true)
+    renderer = HTMLwithPygments.new(hard_wrap: true, filter_html: allow_html)
     options = {
       autolink: true,
       no_intra_emphasis: true,

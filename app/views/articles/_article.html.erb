@@ -29,11 +29,11 @@
     <% end %>
 
     <div class="article-content">
-      <%= md article.content %>
+      <%= md article.content, false %>
     </div>
 
     <%= link_to article_path(article), class: "read-more" do %>
-      read more &raquo;
+      show more &raquo;
     <% end %>
   </div>
 <% end %>

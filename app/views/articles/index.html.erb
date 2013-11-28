@@ -1,10 +1,4 @@
 <div id="articles-index">
-  <% if can? :create, Article %>
-    <p>
-      <%= link_to "Create new Article?", new_article_path %>
-    </p>
-  <% end %>
-
   <% if @tag.present? %>
     <p class="muted">
       Applied Filters:
