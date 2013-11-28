@@ -15,7 +15,7 @@ class ArticlesController < ApplicationController
 
   def unpublished
     @articles = Article.unpublished.page(params[:page]).
-      per(Article::DEFAULT_PER_PAGE)
+      per(Article::DEFAULT_PER_PAGE_TABLE)
 
     render :unpublished
   end
@@ -36,7 +36,12 @@ class ArticlesController < ApplicationController
     @article = current_user.articles.build(article_params)
 
     if @article.save
-      flash[:success] = "Article successfully created."
+      if params[:publish] == "yes"
+        @article.publish!
+        flash[:success] = "Article successfully created and published."
+      else
+        flash[:success] = "Article successfully created."
+      end
 
       redirect_to article_path(@article)
     else
@@ -52,6 +57,10 @@ class ArticlesController < ApplicationController
     @article = Article.find_by(slug: params[:id])
 
     if @article.update(article_params)
+      if params[:publish] == "yes"
+        @article.publish!
+      end
+
       flash[:success] = "Article was successfully updated."
       redirect_to article_path(@article)
     else
@@ -66,8 +75,7 @@ class ArticlesController < ApplicationController
 
     flash[:success] = "Article successfully deleted."
 
-    redirect_to articles_path
-    # render js: "window.location.href = '/';"
+    redirect_to root_path
   end
 
   def publish
@@ -75,7 +83,7 @@ class ArticlesController < ApplicationController
 
     @article.publish!
     flash[:success] = "Article was successfully published."
-    redirect_to articles_path
+    redirect_to root_path
   end
 
   def unpublish

@@ -3,4 +3,8 @@ class AdminController < ApplicationController
 
   def index
   end
+
+  def access_info
+    @access_infos = AccessInfo.all
+  end
 end

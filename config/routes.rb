@@ -20,11 +20,12 @@ JiriCharaBlog::Application.routes.draw do
   get '/oops',  to: 'static_pages#oops'
 
   match '/auth/:provider/callback', to: 'sessions#create', via: [:post, :get]
-  get '/signout', to: 'sessions#destroy', as: 'signout'
+  get '/auth/failure', to: 'sessions#failure'
+  delete '/signout', to: 'sessions#destroy', as: 'signout'
   get '/signin', to: 'sessions#new', as: 'signin'
-  # match '/auth/failure', to: 'articles#index'
 
   get '/admin', to: 'admin#index'
+  get '/admin/access_info', to: 'admin#access_info'
 
   resources :articles, only: [:new, :create] do
     member do
@@ -36,5 +37,10 @@ JiriCharaBlog::Application.routes.draw do
       get :unpublished
     end
   end
-  resources :articles, except: [:index, :new, :create], path: ""
+
+  resources :tags
+
+  resources :articles, except: [:index, :new, :create], path: "" do
+    resources :images
+  end
 end

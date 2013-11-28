@@ -1,0 +1,22 @@
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>IP</th>
+      <th>Browser</th>
+      <th>Platform</th>
+      <th>User</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @access_infos.each do |info| %>
+      <tr>
+        <td><%= info.updated_at.strftime("%Y-%m-%d @ %H:%M") %></td>
+        <td><%= info.ip %></td>
+        <td><%= "#{info.browser} v. #{info.version}" %></td>
+        <td><%= info.platform %></td>
+        <td><%= info.users ? info.users.collect(&:name_or_email).join(', ') : "none" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

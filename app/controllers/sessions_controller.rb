@@ -20,6 +20,11 @@ class SessionsController < ApplicationController
     end
   end
 
+  def failure
+    flash[:notice] = params[:message]
+    redirect_to root_path
+  end
+
   def destroy
     sign_out
     flash[:success] = "Successfully signed out."

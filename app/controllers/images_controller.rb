@@ -2,7 +2,12 @@ class ImagesController < ApplicationController
   authorize_resource
 
   def index
-    @images = Image.all
+    @images = if params[:article_id].present?
+      @article = Article.find_by(slug: params[:article_id])
+      @article.images
+    else
+      Image.all
+    end
 
     render json: @images.collect { |i| i.to_jq_upload }.to_json
   end
@@ -12,9 +17,7 @@ class ImagesController < ApplicationController
       params[:image][:image] = params[:image][:image][0]
     end
 
-    @image = Image.new(params.require(:image).permit(
-      :image, :article_id
-    ))
+    @image = Image.new(params.require(:image).permit(:image, :article_id))
 
     if @image.save
       respond_to do |format|
@@ -34,9 +37,10 @@ class ImagesController < ApplicationController
   end
 
   def destroy
-    @imsage = Image.find(params[:id])
+    @image = Image.find(params[:id])
 
     @image.destroy
+
     render json: true
   end
 end

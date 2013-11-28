@@ -11,10 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131101223842) do
+ActiveRecord::Schema.define(version: 20131107185332) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "access_infos", force: true do |t|
+    t.string   "ip"
+    t.string   "browser"
+    t.string   "version"
+    t.string   "platform"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "access_infos_users", force: true do |t|
+    t.integer "user_id"
+    t.integer "access_info_id"
+  end
 
   create_table "articles", force: true do |t|
     t.string   "title"
@@ -58,13 +72,11 @@ ActiveRecord::Schema.define(version: 20131101223842) do
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "images", force: true do |t|
-    t.integer  "article_id"
     t.string   "image"
+    t.integer  "article_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "images", ["article_id"], name: "index_images_on_article_id", using: :btree
 
   create_table "karmas", force: true do |t|
     t.integer  "user_id"
@@ -91,6 +103,7 @@ ActiveRecord::Schema.define(version: 20131101223842) do
     t.string   "role"
     t.datetime "banned_at"
     t.string   "avatar_url"
+    t.string   "time_zone"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

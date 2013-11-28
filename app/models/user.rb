@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   has_many :comments, dependent: :destroy
 
   has_many :authentications
+  has_and_belongs_to_many :access_infos
 
   scope :banned,     -> { where.not(banned_at: nil) }
   scope :not_banned, -> { where(banned_at: nil) }

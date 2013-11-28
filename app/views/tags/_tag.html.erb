@@ -1,0 +1,18 @@
+<tr>
+  <td><%= tag.id %></td>
+  <td><%= tag.name %></td>
+  <td>
+    <% tag.articles.each do |article| %>
+      <%= link_to(article.id, article_path(article), title: article.title) %><%=
+        ',' unless tag.articles.last == article
+      %>
+    <% end %>
+  </td>
+  <td><%= tag.created_at.strftime("%Y-%m-%d @ %H:%M") %></td>
+  <td><%= tag.updated_at.strftime("%Y-%m-%d @ %H:%M") %></td>
+  <td>
+    <%= link_to(tag_path(tag), method: :delete) do %>
+      <i class="icon-trash"></i>
+    <% end %>
+  </td>
+</tr>

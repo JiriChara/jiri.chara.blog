@@ -6,11 +6,11 @@
   <td>
     <% if can?(:ban, user) && !user.admin? %>
       <% if user.banned? %>
-        <%= link_to "Unban", unban_user_path(user), method: :put, class: "btn btn-mini btn-danger",
-          confirm: "Are you sure?", 'data-confirm-title' => "Unban User: #{truncate(user.name_or_email, length: 20)}?" %>
+        <%= link_to "Unban", unban_user_path(user), method: :patch, class: "btn btn-mini btn-danger",
+          data: { confirm: "Are you sure?" } , 'data-confirm-title' => "Unban User: #{truncate(user.name_or_email, length: 20)}?" %>
       <% else %>
-        <%= link_to "Ban!", ban_user_path(user), method: :put, class: "btn btn-mini btn-danger",
-          confirm: "Are you sure?", 'data-confirm-title' => "Ban User: #{truncate(user.name_or_email, length: 20)}?" %>
+        <%= link_to "Ban!", ban_user_path(user), method: :patch, class: "btn btn-mini btn-danger",
+          confirm: { "Are you sure?" }, 'data-confirm-title' => "Ban User: #{truncate(user.name_or_email, length: 20)}?" %>
       <% end %>
     <% else %>
         -

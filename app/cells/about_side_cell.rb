@@ -6,6 +6,8 @@ class AboutSideCell < Cell::Rails
   attr_reader :current_user
 
   def show(args)
+    append_view_path("app/views")
+
     @current_user = args[:current_user]
     @about_side = AboutSide.actual
     render

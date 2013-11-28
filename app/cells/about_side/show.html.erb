@@ -1,4 +1,8 @@
 <% if @about_side.present? && can?(:read, @about_side) %>
+  <% if can? :update, @about_side %>
+    <%= render partial: 'articles/edit_menu', locals: { article: @about_side } %>
+  <% end %>
+
   <h4><%= @about_side.title %></h4>
   <%= md @about_side.content %>
 <% else %>

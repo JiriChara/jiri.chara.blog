@@ -1,4 +1,9 @@
 <ul class="nav nav-list">
+  <li class="nav-header">Visits</li>
+  <li>
+    <%= link_to "Visits", '/admin/access_info' %>
+  </li>
+
   <li class="nav-header">Users</li>
   <li>
     <%= link_to "All Users", users_path %>
@@ -10,5 +15,10 @@
   </li>
   <li>
     <%= link_to "Unpublished articles", unpublished_articles_path %>
+  </li>
+
+  <li class="nav-header">Tags</li>
+  <li>
+    <%= link_to "All tags", tags_path %>
   </li>
 </ul>

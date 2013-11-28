@@ -8,6 +8,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :role
       t.datetime :banned_at
       t.string :avatar_url
+      t.string :time_zone
 
       t.timestamps
     end

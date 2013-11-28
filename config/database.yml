@@ -56,5 +56,5 @@ production:
   encoding: unicode
   database: jiri_chara_blog_production
   pool: 5
-  username: jiri_chara_blog
+  username: jiri
   password:

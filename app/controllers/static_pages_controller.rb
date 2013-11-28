@@ -2,11 +2,11 @@ class StaticPagesController < ApplicationController
   authorize_resource class: false
 
   def about
-    @about = About.actual
+    @about = About.where(type: "About").actual
   end
 
   def cv
-    @cv = CV.actual
+    @cv = CV.where(type: "CV").actual
   end
 
   def oops

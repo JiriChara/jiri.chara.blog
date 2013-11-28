@@ -16,10 +16,10 @@
         <td><%= article.id %></td>
         <td><%= link_to article.title, article_path(article) %></td>
         <td><%= article.class.to_s %></td>
-        <td><%= article.created_at %></td>
-        <td><%= article.updated_at %></td>
+        <td><%= article.created_at.strftime("%Y-%m-%d @ %H:%M") %></td>
+        <td><%= article.updated_at.strftime("%Y-%m-%d @ %H:%M") %></td>
         <td>
-          <%= link_to publish_article_path(article), method: :put, title: "Publish",
+          <%= link_to publish_article_path(article), method: :patch, title: "Publish",
             confirm: "Are you sure?", 'data-confirm-title' => "Publish article: #{truncate(article.title, length: 20)}?" do %>
             <i class="icon-smile"></i> Publish
           <% end %>
@@ -28,3 +28,5 @@
     <% end %>
   </tbody>
 </table>
+
+<%= paginate @articles %>

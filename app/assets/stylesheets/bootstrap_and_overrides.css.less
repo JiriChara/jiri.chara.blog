@@ -22,7 +22,7 @@ a:hover {
   border-bottom: 1px dotted #FF4540;
 }
 
-.nav-pills, .nav.unstyled {
+.nav-pills, .nav.unstyled, .nav-list {
   a:hover {
     background-color: #FFC8B2 !important;
     border-bottom: none;
@@ -33,6 +33,10 @@ a:hover {
   .dropdown-toggle {
     background-color: #FF716D;
   }
+}
+
+.hidden {
+  display: none;
 }
 
 body { font-family: Ubuntu, sans-serif; }
@@ -79,6 +83,11 @@ body { font-family: Ubuntu, sans-serif; }
     cursor: pointer;
   }
   .about {
+    position: relative;
+    .article-actions {
+      position: absolute;
+      right: 0;
+     }
     .avatar {
       height: 80px;
       width: 80px;
@@ -97,7 +106,17 @@ body { font-family: Ubuntu, sans-serif; }
   #article-images {
     clear: both;
     padding-top: 5px;
-    display: none;
+    // display: none;
+  }
+}
+
+#article-images {
+  table {
+    margin-top: 30px;
+    width: 100%;
+    max-width: 100%;
+    table-layout: fixed;
+    word-wrap: break-word;
   }
 }
 

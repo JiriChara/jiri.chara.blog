@@ -10,11 +10,13 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
+//= require jquery-2.0.3.min
+//= require jquery.turbolinks
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require jquery-fileupload/basic
 //= require jquery-fileupload/vendor/tmpl
+//= require jquery.cookie
 //= require turbolinks
 //= require_tree .
 
@@ -42,4 +44,10 @@ $(function() {
       e.preventDefault();
       $(this).closest('form').submit();
     });
+
+    function setTimezoneOffset() {
+      var currentTime = new Date();
+      $.cookie('time_zone', currentTime.getTimezoneOffset());
+    }
+    setTimezoneOffset();
 }());

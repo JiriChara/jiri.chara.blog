@@ -9,6 +9,8 @@ class Ability
     can :new,    :session
     can :create, :session
 
+    can :user_time_zone, :application
+
     can :about, :static_page
     can :cv,    :static_page
     can :oops,  :static_page
@@ -25,18 +27,6 @@ class Ability
 
       can :new,    Comment
       can [:edit, :update, :destroy], Comment, user_id: user.id
-
-      if user.moderator?
-        can :create, Article
-
-        can [:edit, :update, :publish, :unpublish, :destroy], Article, author: user
-
-        can [:edit, :update, :destroy], Comment do |comment|
-          comment.author.role != "admin"
-        end
-
-        can [:ban, :unban], User
-      end
 
       if user.admin?
         can :manage, :all

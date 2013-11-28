@@ -1,4 +1,4 @@
-<%= form_for @article, url: articles_path do |f| %>
+<%= form_for @article, as: :article, url: @article.persisted? ? article_path(@article) : articles_path do |f| %>
   <div class="control-group<%= @article.errors.include?(:title) ? " error" : "" %>">
     <%= f.label :title %>
     <div class="controls">
@@ -29,27 +29,120 @@
     </div>
   </div>
 
+  <div class="control-group<%= @article.errors.include?(:type) ? " error" : "" %>">
+    <%= f.label :type %>
+    <div class="controls">
+      <%= f.text_field :type %>
+      <% if @article.errors.include?(:type) %>
+        <span class="help-inline"><%= @article.errors[:type].join(', ') %></span>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <div class="controls">
+      <%= label_tag :publish, class: "checkbox" do %>
+        <%= check_box_tag :publish, "yes", false %> Publish
+      <% end %>
+    </div>
+  </div>
+
   <%= f.submit "Save article", class: "btn btn-primary" %>
 <% end %>
 
-<%= form_for Image.new, html: { multipart: true } do |f| %>
-  <%= hidden_field_tag "image[article_id]", @article.id %>
+<% if @article.persisted? %>
+  <%= form_for Image.new, html: { multipart: true } do |f| %>
+    <%= f.hidden_field :article_id, value: @article.id %>
+    <%= f.label :image_upload %>
+    <span class="btn btn-success fileinput-button btn-file">
+      <i class="icon-plus icon-white"></i>
+      <span>Add images...</span>
+      <%= f.file_field :image, multiple: true %>
+    </span>
+  <% end %>
 
-  <%= f.label :image_upload %>
-  <span class="btn btn-success fileinput-button btn-file">
-    <i class="icon-plus icon-white"></i>
-    <span>Add images...</span>
-    <%= f.file_field :image, multiple: true %>
-  </span>
-<% end %>
-
-<div id="article-images">
-  <hr />
-</div>
-
-<script id="template-upload" type="text/x-tmpl">
-  <div class="upload">
-    {%=o.name%}
-    <div class="progress progress-success progress-striped"><div class="bar" style="width: 0%"></div></div>
+  <div id="article-images" class="row-fluid">
+    <table class="download table table-bordered">
+      <thead>
+        <tr>
+          <th>Preview</th>
+          <th>Name</th>
+          <th>Size</th>
+          <th>Url</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
   </div>
-</script>
+
+  <script id="template-upload" type="text/x-tmpl">
+    <div class="upload">
+      {%= o.name %}
+      <div class="progress progress-success progress-striped"><div class="bar" style="width: 0%"></div></div>
+    </div>
+  </script>
+
+  <script id="template-download" type="text/x-tmpl">
+    <tr>
+      <td>
+        <img src="{%= o.thumbnail_url %}" alt="{%= o.name %}" >
+      </td>
+      <td class="name">
+        {%= o.name %}
+      </td>
+      <td>
+        {%= o.size %}
+      </td>
+      <td>
+        {%= o.url %}
+      </td>
+      <td>
+      <a href="#" data-url="{%= o.delete_url %}" data-type="{%= o.delete_type %}" class="delete-image" class="delete-image"><i class="icon-trash"></i></a>
+      </td>
+    </tr>
+  </script>
+
+  <script type="text/javascript">
+  $(function() {
+    $('#article-images').on('click', '.delete-image', function(e) {
+      e.preventDefault();
+      var link = $(this);
+      $.ajax({
+        type: link.attr('data-type'),
+        url: link.attr('data-url'),
+        dataType: 'json',
+        success: function(data) {
+          if(data === true) {
+            link.closest('tr').remove();
+            if($('#article-images table.download tbody tr').length === 0) {
+              $('#article-images table.download').hide();
+            }
+          }
+        }
+      });
+    });
+
+    $.ajax({
+      type: 'GET',
+      url: '<%= article_images_path(@article) %>',
+      dataType: 'json',
+      success: function(data) {
+        var i;
+
+        if(data.length > 0) {
+          $('#article-images table.download').show();
+        } else {
+          $('#article-images table.download').hide();
+        }
+
+        for(i in data) {
+          var result = $(tmpl("template-download", data[i]));
+          $('#article-images table.download tbody').append(result);
+        }
+      }
+    });
+  }());
+  </script>
+<% end %>

@@ -3,7 +3,8 @@ require 'karmable'
 class Article < ActiveRecord::Base
   include Karmable
 
-  DEFAULT_PER_PAGE = 5
+  DEFAULT_PER_PAGE       = 5
+  DEFAULT_PER_PAGE_TABLE = 30
 
   belongs_to :user
 
@@ -15,6 +16,7 @@ class Article < ActiveRecord::Base
   before_create :set_slug
 
   validates_presence_of :title, :content
+  validates_uniqueness_of :slug
 
   scope :published,     -> { where.not(published_at: nil) }
   scope :unpublished,   -> { where(published_at: nil) }

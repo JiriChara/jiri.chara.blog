@@ -8,15 +8,15 @@
       <li>
         <% if article.published? %>
           <% if can? :unpublish, article %>
-            <%= link_to unpublish_article_path(article), method: :put, title: "Unpublish",
-              confirm: "Are you sure?", 'data-confirm-title' => "Unpublish article: #{truncate(article.title, length: 20)}?"  do %>
+            <%= link_to unpublish_article_path(article), method: :patch, title: "Unpublish",
+              data: { confirm: "Are you sure?" }, 'data-confirm-title' => "Unpublish article: #{truncate(article.title, length: 20)}?"  do %>
               <i class="icon-frown"></i> Unpublish
             <% end %>
           <% end %>
         <% else %>
           <% if can? :publish, article %>
-            <%= link_to publish_article_path(article), method: :put, title: "Publish",
-              confirm: "Are you sure?", 'data-confirm-title' => "Publish article: #{truncate(article.title, length: 20)}?"  do %>
+            <%= link_to publish_article_path(article), method: :patch, title: "Publish",
+              data: { confirm: "Are you sure?" }, 'data-confirm-title' => "Publish article: #{truncate(article.title, length: 20)}?"  do %>
               <i class="icon-smile"></i> Publish
             <% end %>
           <% end %>

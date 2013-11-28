@@ -10,7 +10,7 @@ $(function () {
 
             data.context = $(tmpl("template-upload", file));
 
-            $('#article-images').append(data.context);
+            $('#article-images').prepend(data.context);
 
             data.submit();
         },
@@ -22,7 +22,10 @@ $(function () {
             }
         },
         done: function(e, data) {
-            data.context.html('');
+            data.context.remove();
+            var result = $(tmpl("template-download", data.result[0]));
+            $('#article-images table.download').show();
+            $('#article-images table.download tbody').append(result);
         }
     });
 });
