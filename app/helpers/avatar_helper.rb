@@ -13,6 +13,6 @@ module AvatarHelper
   end
 
   def guest_avatar_url(opts={})
-    "/assets/default_avatar.jpg"
+    "default_avatar.jpg"
   end
 end

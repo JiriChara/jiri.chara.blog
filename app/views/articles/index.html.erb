@@ -10,7 +10,7 @@
     <%= render(partial: "articles/article", collection: @articles) %>
   <% else %>
     <p class="muted">
-      <%= image_tag "/assets/oops.png", class: "img-polaroid" %>
+      <%= image_tag "oops.png", class: "img-polaroid" %>
       Ooops.. Nothing out there!
 
       <% if can? :create, Article %>
