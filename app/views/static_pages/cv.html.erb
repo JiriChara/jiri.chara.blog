@@ -7,7 +7,7 @@
         <p class="muted published-at span6">
           <% if @cv.published? %>
             <small>
-              Publised at: <%= @cv.published_at.in_time_zone.strftime("%Y-%m-%d @ %H:%M") %>
+              Published: <%= @cv.published_at.in_time_zone.strftime("%Y-%m-%d @ %H:%M") %>
             </small>
           <% else %>
             <span class="label label-warning">Unpublished</span>

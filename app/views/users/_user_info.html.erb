@@ -18,7 +18,7 @@
           <%= user.authentications.collect(&:provider).join(", ") %>
         </dd>
       <% end %>
-      <% if user.access_infos.any? %>
+      <% if current_user.admin? && user.access_infos.any? %>
         <dt>Access Info</dt>
         <% user.access_infos.each do |ai| %>
           <dd>

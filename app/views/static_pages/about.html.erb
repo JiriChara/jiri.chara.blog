@@ -7,7 +7,7 @@
         <p class="muted published-at span6">
           <% if @about.published? %>
             <small>
-              Publised at: <%= @about.published_at.strftime("%Y-%m-%d @ %H:%M") %>
+              Published: <%= @about.published_at.strftime("%Y-%m-%d @ %H:%M") %>
             </small>
           <% else %>
             <span class="label label-warning">Unpublished</span>
