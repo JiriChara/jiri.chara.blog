@@ -62,8 +62,6 @@ GEM
       multipart-post (~> 1.2.0)
     font-awesome-rails (4.0.1.0)
       railties (>= 3.2, < 5.0)
-    font-kit-rails (1.0.2)
-      rails
     gemoji (1.4.0)
     hashie (2.0.5)
     hike (1.2.3)
@@ -221,7 +219,6 @@ DEPENDENCIES
   factory_girl_rails
   faker
   font-awesome-rails
-  font-kit-rails
   gemoji
   jbuilder (~> 1.2)
   jquery-fileupload-rails
