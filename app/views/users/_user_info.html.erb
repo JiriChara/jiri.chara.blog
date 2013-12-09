@@ -12,7 +12,7 @@
       <% end %>
       <dt>Role</dt>
       <dd><%= user.role.capitalize rescue "Regular user" %></dd>
-      <% if user.authentications.any? %>
+      <% if signed_in? && current_user.admin? && user.authentications.any? %>
         <dt>Authentications</dt>
         <dd>
           <%= user.authentications.collect(&:provider).join(", ") %>
