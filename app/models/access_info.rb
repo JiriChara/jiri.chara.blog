@@ -16,7 +16,7 @@ class AccessInfo < ActiveRecord::Base
       rescue
         "unknown"
       end
-      self.update_column(:country, country)
+      self.update_column(:country, country).force_encoding("ISO-8859-1").encode("UTF-8")
       self.reload.country
     end
   end
@@ -26,7 +26,7 @@ class AccessInfo < ActiveRecord::Base
       city
     else
       city = begin
-        geo_ip.city(ip).city_name
+        geo_ip.city(ip).city_name.force_encoding("ISO-8859-1").encode("UTF-8")
       rescue
         "unknown"
       end
