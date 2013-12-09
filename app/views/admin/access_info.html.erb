@@ -6,16 +6,21 @@
       <th>Browser</th>
       <th>Platform</th>
       <th>User</th>
+      <th>Country</th>
+      <th>City</th>
     </tr>
   </thead>
   <tbody>
     <% @access_infos.each do |info| %>
       <tr>
+        <% geoip = GeoIP.new("#{Rails.root}/public/GeoLiteCity.dat") %>
         <td><%= info.updated_at.strftime("%Y-%m-%d @ %H:%M") %></td>
         <td><%= info.ip %></td>
         <td><%= "#{info.browser} v. #{info.version}" %></td>
         <td><%= info.platform %></td>
         <td><%= info.users ? info.users.collect(&:name_or_email).join(', ') : "none" %></td>
+        <td><%= geoip.city(info.ip).country_name rescue "unknown" %></td>
+        <td><%= geoip.city(info.ip).city_name rescue "unknown" %></td>
       </tr>
     <% end %>
   </tbody>

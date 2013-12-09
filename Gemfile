@@ -25,6 +25,8 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jquery-turbolinks'
 
+gem 'jquery-datatables-rails', git: 'git://github.com/rweng/jquery-datatables-rails.git'
+
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
@@ -36,6 +38,8 @@ gem 'cancan'
 
 gem 'carrierwave'
 gem 'rmagick'
+
+gem 'geoip'
 
 gem 'kaminari'
 gem 'cells'
