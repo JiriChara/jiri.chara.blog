@@ -1,4 +1,4 @@
-<table class="table table-bordered">
+<table class="table table-bordered" id="access_info" data-source="<%= admin_access_info_path(format: "json") %>">
   <thead>
     <tr>
       <th>Date</th>
@@ -11,27 +11,5 @@
     </tr>
   </thead>
   <tbody>
-    <% @access_infos.each do |info| %>
-      <tr>
-        <% geoip = GeoIP.new("#{Rails.root}/public/GeoLiteCity.dat") %>
-        <td><%= info.updated_at.strftime("%Y-%m-%d @ %H:%M") %></td>
-        <td><%= info.ip %></td>
-        <td><%= "#{info.browser} v. #{info.version}" %></td>
-        <td><%= info.platform %></td>
-        <td><%= info.users ? info.users.collect(&:name_or_email).join(', ') : "none" %></td>
-        <td><%= begin
-            geoip.city(info.ip).country_name.force_encoding("ISO-8859-1").encode("UTF-8")
-          rescue
-            "unknown"
-          end
-        %></td>
-        <td><%= begin
-          geoip.city(info.ip).city_name.force_encoding("ISO-8859-1").encode("UTF-8")
-        rescue
-          "unknown"
-        end
-        %></td>
-      </tr>
-    <% end %>
   </tbody>
 </table>

@@ -14,4 +14,5 @@
  *= require pygments
  *= require jquery.fileupload-ui
  *= require fonts
+ *= require dataTables/jquery.dataTables.bootstrap
  */

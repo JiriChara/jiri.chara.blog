@@ -5,6 +5,9 @@ class AdminController < ApplicationController
   end
 
   def access_info
-    @access_infos = AccessInfo.all
+    respond_to do |format|
+      format.html
+      format.json { render json: AccessInfoDatatable.new(view_context) }
+    end
   end
 end

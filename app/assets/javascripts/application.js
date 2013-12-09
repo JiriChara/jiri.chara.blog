@@ -18,6 +18,10 @@
 //= require jquery-fileupload/vendor/tmpl
 //= require jquery.cookie
 //= require turbolinks
+//= require dataTables/jquery.dataTables
+//= require dataTables/jquery.dataTables.bootstrap
+//= require dataTables/jquery.dataTables.api.fnReloadAjax
+//= require dataTables/extras/TableTools
 //= require_tree .
 
 var Spinner = (function() {
