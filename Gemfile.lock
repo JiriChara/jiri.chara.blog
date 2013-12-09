@@ -107,7 +107,7 @@ GEM
     omniauth (1.1.4)
       hashie (>= 1.2, < 3)
       rack
-    omniauth-facebook (1.4.1)
+    omniauth-facebook (1.5.1)
       omniauth-oauth2 (~> 1.1.0)
     omniauth-github (1.1.1)
       omniauth (~> 1.0)
@@ -226,7 +226,7 @@ DEPENDENCIES
   jquery-turbolinks
   kaminari
   less-rails
-  omniauth-facebook
+  omniauth-facebook (~> 1.5.1)
   omniauth-github
   omniauth-openid
   pg

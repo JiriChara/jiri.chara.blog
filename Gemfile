@@ -47,7 +47,7 @@ gem 'redcarpet'
 gem 'pygments.rb'
 gem 'gemoji'
 
-gem 'omniauth-facebook'
+gem 'omniauth-facebook', '~> 1.5.1'
 gem 'omniauth-github'
 gem 'omniauth-openid'
 
