@@ -20,13 +20,13 @@
         <td><%= info.platform %></td>
         <td><%= info.users ? info.users.collect(&:name_or_email).join(', ') : "none" %></td>
         <td><%= begin
-            geoip.city(info.ip).country_name
+            geoip.city(info.ip).country_name.force_encoding("ISO-8859-1").encode("UTF-8")
           rescue
             "unknown"
           end
         %></td>
         <td><%= begin
-          geoip.city(info.ip).city_name
+          geoip.city(info.ip).city_name.force_encoding("ISO-8859-1").encode("UTF-8")
         rescue
           "unknown"
         end
