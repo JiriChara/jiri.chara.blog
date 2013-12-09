@@ -9,7 +9,7 @@ class AccessInfoDatatable
     {
       sEcho:                params[:sEcho].to_i,
       iTotalRecords:        AccessInfo.count,
-      iTotalDisplayRecords: access_info.count,
+      iTotalDisplayRecords: access_info.total_count,
       aaData:               data
     }
   end
