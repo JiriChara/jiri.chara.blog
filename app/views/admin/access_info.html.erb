@@ -19,8 +19,18 @@
         <td><%= "#{info.browser} v. #{info.version}" %></td>
         <td><%= info.platform %></td>
         <td><%= info.users ? info.users.collect(&:name_or_email).join(', ') : "none" %></td>
-        <td><%= geoip.city(info.ip).country_name rescue "unknown" %></td>
-        <td><%= geoip.city(info.ip).city_name rescue "unknown" %></td>
+        <td><%= begin
+            geoip.city(info.ip).country_name
+          rescue
+            "unknown"
+          end
+        %></td>
+        <td><%= begin
+          geoip.city(info.ip).city_name
+        rescue
+          "unknown"
+        end
+        %></td>
       </tr>
     <% end %>
   </tbody>
