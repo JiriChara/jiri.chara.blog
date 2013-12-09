@@ -42,7 +42,11 @@ private
    end
 
    if params[:sSearch].present?
-     res = res.where("ip like :search or platform like :search", search: "%#{params[:sSearch]}%")
+     q = %w[ip browser version platform country city].map do |x|
+       "lower(#{x})"
+     end.join(" like :search or ")
+
+     res = res.where("#{q} like :search", search: "%#{params[:sSearch].downcase}%")
    end
 
    res = res.page(page).per(per_page)
