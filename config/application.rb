@@ -32,5 +32,7 @@ module JiriCharaBlog
     config.assets.paths << Emoji.images_path
 
     config.i18n.enforce_available_locales = false
+
+    config.encoding = "utf-8"
   end
 end
