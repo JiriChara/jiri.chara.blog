@@ -34,19 +34,21 @@ private
  end
 
  def fetch_access_info
-   case sort_column
-   when "user"
-     res = AccessInfo.includes(:users).order("users.name #{sort_direction}")
-   else
-     res = AccessInfo.order(sort_column => sort_direction.to_sym)
-   end
-
    if params[:sSearch].present?
      q = %w[ip browser version platform country city].map do |x|
        "lower(#{x})"
      end.join(" like :search or ")
 
-     res = res.where("#{q} like :search", search: "%#{params[:sSearch].downcase}%")
+     res = AccessInfo.all.where("#{q} like :search", search: "%#{params[:sSearch].downcase}%")
+   else
+     res = AccessInfo.all
+   end
+
+   case sort_column
+   when "user"
+     res = res.includes(:users).order("users.name #{sort_direction}")
+   else
+     res = res.order(sort_column => sort_direction.to_sym)
    end
 
    res = res.page(page).per(per_page)

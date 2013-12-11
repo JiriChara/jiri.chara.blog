@@ -12,11 +12,11 @@ class AccessInfo < ActiveRecord::Base
       country
     else
       country = begin
-        geo_ip.city(ip).country_name
+        geo_ip.city(ip).country_name.force_encoding("ISO-8859-1").encode("UTF-8")
       rescue
         "unknown"
       end
-      self.update_column(:country, country).force_encoding("ISO-8859-1").encode("UTF-8")
+      self.update_column(:country, country)
       self.reload.country
     end
   end
