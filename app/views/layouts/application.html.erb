@@ -61,16 +61,17 @@
                       <%= tag.display_name %>
                       <i class="icon-remove"></i>
                     <% end %>
-                  <% else %>
-                    <li>
-                      <%= link_to root_path(tag_id: tag) do %>
-                        <%= tag.display_name %>
-                      <% end %>
-                    </li>
-                  <% end %>
+                  </li>
+                <% else %>
+                  <li>
+                    <%= link_to root_path(tag_id: tag) do %>
+                      <%= tag.display_name %>
+                    <% end %>
+                  </li>
                 <% end %>
-              </ul>
-            </div>
+              <% end %>
+            </ul>
+          </div>
 
             <div class="about">
               <%= render_cell(:about_side, :show, current_user: current_user) %>
