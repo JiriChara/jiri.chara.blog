@@ -12,6 +12,6 @@ class Tag < ActiveRecord::Base
   end
 
   def display_name
-    name.titleize
+    name
   end
 end
