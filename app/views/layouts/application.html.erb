@@ -64,7 +64,7 @@
                   </li>
                 <% else %>
                   <li>
-                    <%= link_to root_path(tag_id: tag) do %>
+                    <%= link_to root_path(tag: tag.slug) do %>
                       <%= tag.display_name %>
                     <% end %>
                   </li>

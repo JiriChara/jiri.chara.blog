@@ -7,7 +7,7 @@ class ArticlesController < ApplicationController
   }
 
   def index
-    @tag = Tag.find(params[:tag_id]) if params[:tag_id]
+    @tag = Tag.find_by!(slug: params[:tag]) if params[:tag]
     @articles = (@tag ? @tag.articles : Article).
       only_articles.published.order(published_at: :desc).
       page(params[:page]).per(Article::DEFAULT_PER_PAGE)
