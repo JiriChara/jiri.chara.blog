@@ -9,6 +9,16 @@
     </div>
   </div>
 
+  <div class="control-group<%= @article.errors.include?(:slug) ? " error" : "" %>">
+    <%= f.label :slug %>
+    <div class="controls">
+      <%= f.text_field :slug %>
+      <% if @article.errors.include?(:slug) %>
+        <span class="help-inline"><%= @article.errors[:slug].join(', ') %></span>
+      <% end %>
+    </div>
+  </div>
+
   <div class="control-group<%= @article.errors.include?(:content) ? " error" : "" %>">
     <%= f.label :content %>
     <div class="controls">
