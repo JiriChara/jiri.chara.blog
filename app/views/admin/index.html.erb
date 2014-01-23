@@ -1,24 +1,34 @@
 <ul class="nav nav-list">
-  <li class="nav-header">Visits</li>
-  <li>
-    <%= link_to "Visits", '/admin/access_info' %>
-  </li>
-
-  <li class="nav-header">Users</li>
-  <li>
-    <%= link_to "All Users", users_path %>
-  </li>
-
   <li class="nav-header">Articles</li>
   <li>
-    <%= link_to "Create new article", new_article_path %>
+    <%= link_to new_article_path do %>
+      <i class="icon-plus"></i> Create new article
+    <% end %>
   </li>
   <li>
-    <%= link_to "Unpublished articles", unpublished_articles_path %>
+    <%= link_to unpublished_articles_path do %>
+      <i class="icon-frown"></i> Unpublished articles
+    <% end %>
   </li>
 
   <li class="nav-header">Tags</li>
   <li>
-    <%= link_to "All tags", tags_path %>
+    <%= link_to tags_path do %>
+      <i class="icon-tag"></i> Tags
+    <% end %>
+  </li>
+
+  <li class="nav-header">Users</li>
+  <li>
+    <%= link_to users_path do %>
+      <i class="icon-user"></i> Users
+    <% end %>
+  </li>
+
+  <li class="nav-header">Visits</li>
+  <li>
+    <%= link_to '/admin/access_info' do %>
+    <i class="icon-globe"></i> Visits
+  <% end %>
   </li>
 </ul>
