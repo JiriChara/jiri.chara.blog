@@ -11,8 +11,31 @@
   <td><%= tag.created_at.strftime("%Y-%m-%d @ %H:%M") %></td>
   <td><%= tag.updated_at.strftime("%Y-%m-%d @ %H:%M") %></td>
   <td>
-    <%= link_to(tag_path(tag), method: :delete) do %>
-      <i class="icon-trash"></i>
+    <% if can? :edit, tag %>
+      <div class="btn-group">
+        <a class="btn dropdown-toggle btn-mini" data-toggle="dropdown" href="#">
+          <i class="icon-wrench"></i>
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li>
+            <%= link_to(edit_tag_path(tag)) do %>
+                <i class="icon-wrench"></i> Edit
+            <% end %>
+          </li>
+
+          <% if can?(:destroy, tag) %>
+            <li>
+              <%= link_to(tag_path(tag), method: :delete,
+                data: { confirm: "Are you sure?" },
+                'data-confirm-title' => "Delete tag: #{truncate(tag.name, length: 20)}?") do
+              %>
+                <i class="icon-remove"></i> Delete
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
     <% end %>
   </td>
 </tr>
