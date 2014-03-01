@@ -21,9 +21,10 @@ module SessionsHelper
 
   def store_location
     session[:return_to] = {
-      method: request.method,
-      url:    request.url,
-      params: params
+      method:     request.method,
+      url:        request.url,
+      params:     params,
+      expires_in: 10.minutes.from_now.in_time_zone
     }
   end
 

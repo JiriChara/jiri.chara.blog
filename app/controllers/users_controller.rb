@@ -1,16 +1,22 @@
 class UsersController < ApplicationController
   authorize_resource
 
+  rescue_from ActiveRecord::RecordNotFound, with: ->() {
+    flash[:error] = "User not found."
+    session[:error_code] = 404
+    redirect_to oops_path
+  }
+
   def index
     @users = User.all
   end
 
   def show
-    @user = User.find_by(slug: params[:id])
+    @user = User.find_by!(slug: params[:id])
   end
 
   def edit
-    @user = User.find_by(slug: params[:id])
+    @user = User.find_by!(slug: params[:id])
   end
 
   def update

@@ -11,7 +11,9 @@ class ApplicationController < ActionController::Base
   rescue_from CanCan::AccessDenied do |exception|
     flash[:error] = exception.message
 
-    redirect_to oops_path(status: 303)
+    session[:error_code] = 303
+
+    redirect_to oops_path
   end
 
   def get_access_info

@@ -15,7 +15,8 @@ class SessionsController < ApplicationController
 
     Rails.logger.info "Session: #{session.inspect}"
 
-    unless session[:return_to]
+    if session[:return_to].blank? ||
+       session[:return_to][:expires_in] < Time.zone.now
       redirect_to root_path
     end
   end

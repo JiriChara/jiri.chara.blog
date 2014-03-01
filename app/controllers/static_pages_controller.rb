@@ -10,6 +10,6 @@ class StaticPagesController < ApplicationController
   end
 
   def oops
-    @status = params[:status] if params[:status]
+    @status  = session.delete(:error_code)
   end
 end

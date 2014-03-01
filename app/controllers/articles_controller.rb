@@ -3,7 +3,8 @@ class ArticlesController < ApplicationController
 
   rescue_from ActiveRecord::RecordNotFound, with: ->() {
     flash[:error] = "Article not found."
-    redirect_to oops_path(status: 404)
+    session[:error_code] = 404
+    redirect_to oops_path
   }
 
   def index
@@ -21,7 +22,7 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    @article = Article.find_by(slug: params[:id])
+    @article = Article.find_by!(slug: params[:id])
   end
 
   def new
@@ -50,7 +51,7 @@ class ArticlesController < ApplicationController
   end
 
   def edit
-    @article = Article.find_by(slug: params[:id])
+    @article = Article.find_by!(slug: params[:id])
   end
 
   def update
