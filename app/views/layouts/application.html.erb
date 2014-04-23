@@ -58,14 +58,14 @@
                 <% if @tag && @tag == tag %>
                   <li class="disabled">
                     <%= link_to root_path do %>
-                      <%= tag.display_name %>
+                      <i class="icon-tag"></i> <%= tag.display_name %> (<%= tag.articles.count %>)
                       <i class="icon-remove"></i>
                     <% end %>
                   </li>
                 <% else %>
                   <li>
                     <%= link_to root_path(tag: tag.slug) do %>
-                      <%= tag.display_name %>
+                      <i class="icon-tag"></i> <%= tag.display_name %> (<%= tag.articles.count %>)
                     <% end %>
                   </li>
                 <% end %>
