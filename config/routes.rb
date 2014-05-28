@@ -12,7 +12,7 @@ JiriCharaBlog::Application.routes.draw do
 
   resources :images, only: [:index, :create, :destroy]
 
-  resources :karmas, only: [:create, :destroy]
+  resources :karmas, only: [:create]
 
   # Static pages
   get '/about', to: 'static_pages#about'

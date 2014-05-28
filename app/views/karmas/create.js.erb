@@ -1,1 +1,9 @@
-$('#karma-<%= @object.id %>').replaceWith('<%=j render(partial: 'karmas/karma', locals: { object: @object }) %>');
+if($('.comments').length > 0) {
+  $('#karma-<%= @object.id %>').replaceWith('<%=j render(partial: 'karmas/karma', locals: { object: @object }) %>');
+} else {
+  <% if @object.respond_to?(:article) %>
+    window.location.href = '<%=j url_for(@object.article) %>';
+  <% else %>
+    window.location.href = '/';
+  <% end %>
+}
