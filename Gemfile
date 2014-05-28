@@ -53,7 +53,7 @@ gem 'gemoji'
 
 gem 'omniauth-facebook', '~> 1.5.1'
 gem 'omniauth-github'
-gem 'omniauth-openid'
+gem 'omniauth-google-oauth2'
 
 gem 'therubyracer'
 gem 'less-rails'
