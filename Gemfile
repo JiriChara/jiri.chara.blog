@@ -34,6 +34,7 @@ gem 'unicorn'
 
 # API
 gem 'rabl-rails'
+gem 'responders', '~> 2.0'
 
 gem 'dalli'
 

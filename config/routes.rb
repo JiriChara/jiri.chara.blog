@@ -1,6 +1,11 @@
 JiriCharaBlog::Application.routes.draw do
   root to: 'articles#index'
 
+  # API
+  scope :api, defaults: { format: 'json' } do
+    resources :articles, only: [:index]
+  end
+
   resources :users do
     member do
       patch :ban
