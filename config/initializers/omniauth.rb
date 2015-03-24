@@ -8,4 +8,3 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   provider :google_oauth2,
     CONFIG[:omniauth][:google][:key], CONFIG[:omniauth][:google][:secret]
 end
-

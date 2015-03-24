@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.0'
+gem 'rails', '4.2.1'
 
 # Use postgresql as the database for Active Record
 gem 'pg'
@@ -25,11 +25,13 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jquery-turbolinks'
 
-gem 'jquery-datatables-rails', git: 'git://github.com/rweng/jquery-datatables-rails.git'
+gem 'jquery-datatables-rails', '~> 1.12.2'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
+gem 'raindrops', '~> 0.13'
+gem 'kgio', '~> 2.9'
 gem 'unicorn'
 
 gem 'dalli'
@@ -57,7 +59,7 @@ gem 'omniauth-google-oauth2'
 
 gem 'therubyracer'
 gem 'less-rails'
-gem 'twitter-bootstrap-rails'
+gem 'twitter-bootstrap-rails', '~> 2.2.8'
 gem 'jquery-fileupload-rails'
 gem 'font-awesome-rails'
 
