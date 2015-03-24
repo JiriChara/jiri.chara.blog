@@ -266,7 +266,6 @@ DEPENDENCIES
   jquery-rails
   jquery-turbolinks
   kaminari
-  kgio (~> 2.9)
   less-rails
   omniauth-facebook (~> 1.5.1)
   omniauth-github
@@ -274,7 +273,6 @@ DEPENDENCIES
   pg
   pygments.rb
   rails (= 4.2.1)
-  raindrops (~> 0.13)
   redcarpet
   rmagick
   rspec-rails

@@ -30,8 +30,8 @@ gem 'jquery-datatables-rails', '~> 1.12.2'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
-gem 'raindrops', '~> 0.13'
-gem 'kgio', '~> 2.9'
+# gem 'raindrops', '~> 0.13'
+# gem 'kgio', '~> 2.9'
 gem 'unicorn'
 
 gem 'dalli'
