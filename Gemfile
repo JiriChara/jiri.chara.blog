@@ -33,8 +33,7 @@ gem 'jbuilder', '~> 1.2'
 gem 'unicorn'
 
 # API
-gem 'rabl'
-gem 'oj'
+gem 'rabl-rails'
 
 gem 'dalli'
 
