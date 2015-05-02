@@ -1,7 +1,7 @@
 class ArticlesController < ApplicationController
   authorize_resource
 
-  respond_to :html, :json
+  respond_to :html
 
   rescue_from ActiveRecord::RecordNotFound, with: ->() {
     flash[:error] = "Article not found."
@@ -14,7 +14,6 @@ class ArticlesController < ApplicationController
     @articles = (@tag ? @tag.articles : Article).
       only_articles.published.order(published_at: :desc).
       page(params[:page]).per(Article::DEFAULT_PER_PAGE)
-    # respond_with(@articles)
   end
 
   def unpublished

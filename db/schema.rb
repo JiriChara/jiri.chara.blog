@@ -11,33 +11,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140123102412) do
+ActiveRecord::Schema.define(version: 20150502211117) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "access_infos", force: true do |t|
-    t.string   "ip"
-    t.string   "browser"
-    t.string   "version"
-    t.string   "platform"
+  create_table "access_infos", force: :cascade do |t|
+    t.string   "ip",         limit: 255
+    t.string   "browser",    limit: 255
+    t.string   "version",    limit: 255
+    t.string   "platform",   limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "country"
-    t.string   "city"
+    t.string   "country",    limit: 255
+    t.string   "city",       limit: 255
   end
 
-  create_table "access_infos_users", force: true do |t|
+  create_table "access_infos_users", force: :cascade do |t|
     t.integer "user_id"
     t.integer "access_info_id"
   end
 
-  create_table "articles", force: true do |t|
-    t.string   "title"
-    t.string   "slug"
+  create_table "articles", force: :cascade do |t|
+    t.string   "title",        limit: 255
+    t.string   "slug",         limit: 255
     t.text     "content"
     t.datetime "published_at"
-    t.string   "type"
+    t.string   "type",         limit: 255
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -45,14 +45,14 @@ ActiveRecord::Schema.define(version: 20140123102412) do
 
   add_index "articles", ["user_id"], name: "index_articles_on_user_id", using: :btree
 
-  create_table "articles_tags", force: true do |t|
+  create_table "articles_tags", force: :cascade do |t|
     t.integer "article_id"
     t.integer "tag_id"
   end
 
-  create_table "authentications", force: true do |t|
-    t.string   "provider"
-    t.string   "uid"
+  create_table "authentications", force: :cascade do |t|
+    t.string   "provider",   limit: 255
+    t.string   "uid",        limit: 255
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -60,9 +60,9 @@ ActiveRecord::Schema.define(version: 20140123102412) do
 
   add_index "authentications", ["user_id"], name: "index_authentications_on_user_id", using: :btree
 
-  create_table "comments", force: true do |t|
+  create_table "comments", force: :cascade do |t|
     t.text     "text"
-    t.string   "ancestry"
+    t.string   "ancestry",   limit: 255
     t.integer  "user_id"
     t.integer  "article_id"
     t.datetime "created_at"
@@ -73,42 +73,43 @@ ActiveRecord::Schema.define(version: 20140123102412) do
   add_index "comments", ["article_id"], name: "index_comments_on_article_id", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
-  create_table "images", force: true do |t|
-    t.string   "image"
+  create_table "images", force: :cascade do |t|
+    t.string   "image",      limit: 255
     t.integer  "article_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "karmas", force: true do |t|
+  create_table "karmas", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "value",         default: 0
+    t.integer  "value",                     default: 0
     t.integer  "karmable_id"
-    t.string   "karmable_type"
+    t.string   "karmable_type", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "karmas", ["user_id"], name: "index_karmas_on_user_id", using: :btree
 
-  create_table "tags", force: true do |t|
-    t.string   "name"
+  create_table "tags", force: :cascade do |t|
+    t.string   "name",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "slug"
+    t.string   "slug",       limit: 255
   end
 
-  create_table "users", force: true do |t|
-    t.string   "name"
-    t.string   "slug"
-    t.string   "email"
-    t.string   "remember_token"
-    t.string   "role"
+  create_table "users", force: :cascade do |t|
+    t.string   "name",           limit: 255
+    t.string   "slug",           limit: 255
+    t.string   "email",          limit: 255
+    t.string   "remember_token", limit: 255
+    t.string   "role",           limit: 255
     t.datetime "banned_at"
-    t.string   "avatar_url"
-    t.string   "time_zone"
+    t.string   "avatar_url",     limit: 255
+    t.string   "time_zone",      limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "auth_token"
   end
 
 end
