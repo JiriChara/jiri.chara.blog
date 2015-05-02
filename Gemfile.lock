@@ -74,7 +74,7 @@ GEM
       multipart-post (>= 1.2, < 3)
     font-awesome-rails (4.3.0.0)
       railties (>= 3.2, < 5.0)
-    gemoji (2.1.0)
+    gemoji (1.5.0)
     geoip (1.5.0)
     globalid (0.3.3)
       activesupport (>= 4.1.0)
@@ -264,7 +264,7 @@ DEPENDENCIES
   factory_girl_rails
   faker
   font-awesome-rails
-  gemoji
+  gemoji (~> 1.5)
   geoip
   jbuilder (~> 1.2)
   jquery-datatables-rails (~> 1.12.2)

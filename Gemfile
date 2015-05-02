@@ -53,7 +53,7 @@ gem 'browser'
 
 gem 'redcarpet'
 gem 'pygments.rb'
-gem 'gemoji'
+gem 'gemoji', '~>1.5'
 
 gem 'omniauth-facebook', '~> 1.5.1'
 gem 'omniauth-github'
