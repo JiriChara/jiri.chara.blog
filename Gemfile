@@ -38,7 +38,7 @@ gem 'responders', '~> 2.0'
 
 gem 'dalli'
 
-gem 'cancan'
+gem 'cancancan', '~> 1.10'
 
 gem 'carrierwave'
 gem 'rmagick'
