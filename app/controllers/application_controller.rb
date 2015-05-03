@@ -16,6 +16,18 @@ class ApplicationController < ActionController::Base
     redirect_to oops_path
   end
 
+  rescue_from ActiveRecord::RecordNotFound, with: ->() {
+    render_404
+  }
+
+  rescue_from ActionController::RoutingError, with: ->() {
+    render_404
+  }
+
+  rescue_from ActionController::UnknownController, with: ->() {
+    render_404
+  }
+
   def get_access_info
     info = AccessInfo.find_or_create_by(
       ip: request.remote_ip,
@@ -47,5 +59,14 @@ class ApplicationController < ActionController::Base
     rescue
       yield
     end
+  end
+
+protected
+  def render_404
+    flash[:error] = "Not found"
+
+    session[:error_code] = 404
+
+    redirect_to oops_path
   end
 end
