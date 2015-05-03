@@ -3,7 +3,13 @@ JiriCharaBlog::Application.routes.draw do
   namespace :api, path: '/', constraints: { subdomain: 'api' }, defaults: { format: 'json' } do
     root to: 'home#index'
 
-    resources :articles, only: [:index, :show, :create]
+    resources :articles, only: [:index, :show, :create, :destroy] do
+      resources :comments, only: [:index]
+    end
+
+    resources :users, only: [:index, :show, :create] do
+      resources :comments, only: [:index]
+    end
 
     match '*unmatched_route', to: 'errors#raise_not_found!', via: :all
   end
@@ -53,5 +59,7 @@ JiriCharaBlog::Application.routes.draw do
     resources :articles, except: [:index, :new, :create], path: "" do
       resources :images
     end
+
+    match '*unmatched_route', to: 'errors#raise_not_found!', via: :all
   end
 end
