@@ -9,7 +9,7 @@ module Api
 
       @articles = (tag ? tag.articles : Article).
         only_articles.published.order(published_at: :desc).
-        page(params[:page]).per(Article::DEFAULT_PER_PAGE)
+        page(params[:page]).per(params[:per_page] || Article::DEFAULT_PER_PAGE)
     end
 
     def show
