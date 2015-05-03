@@ -1,26 +1,26 @@
 <ul class="nav nav-pills pull-right main-nav">
   <li class="<%= controller_name == "articles" ? "active" : "" %>">
     <%= link_to root_path do %>
-      <i class="icon-home"></i> Home
+      Home
     <% end %>
   </li>
 
   <li class="<%= controller_name == "static_pages" && action_name == "about" ? "active" : "" %>">
     <%= link_to(about_path) do %>
-      <i class="icon-question"></i> About
+      About
     <% end %>
   </li>
 
   <li class="<%= controller_name == "static_pages" && action_name == "cv" ? "active" : "" %>">
     <%= link_to(cv_path) do %>
-      <i class="icon-file-text"></i> Curriculum vitae
+      Curriculum vitae
     <% end %>
   </li>
 
   <% if current_user && current_user.admin? %>
     <li class="<%= controller_name == "admin" || (controller_name == "users" && action_name == "index") ? "active" : "" %>">
       <%= link_to admin_path do %>
-        <i class="icon-cogs"></i> Admin
+        Admin
       <% end %>
     </li>
   <% end %>
