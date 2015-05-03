@@ -24,40 +24,4 @@
       <% end %>
     </li>
   <% end %>
-
-  <% if current_user.present? %>
-    <li class="<%= controller_name == "users" && %w[edit show].include?(action_name) && @user.present? && @user == current_user ? "active" : "" %>">
-      <%= link_to edit_user_path(current_user) do %>
-        <i class="icon-user"></i> Profile
-      <% end %>
-    </li>
-    <li>
-      <%= link_to signout_path, method: :delete do %>
-        <i class="icon-signout"></i> Sign out
-      <% end %>
-    </li>
-  <% else %>
-    <li class="dropdown">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-        <i class="icon-signin"></i> Sign in <b class="caret"></b>
-      </a>
-      <ul class="dropdown-menu">
-        <li>
-          <%= link_to "/auth/facebook" do %>
-            <i class="icon-facebook-sign"></i> Sign in through facebook
-          <% end %>
-        </li>
-        <li>
-          <%= link_to "/auth/github" do %>
-            <i class="icon-github-sign"></i> Sign in through github
-          <% end %>
-        </li>
-        <li>
-          <%= link_to "/auth/google_oauth2" do %>
-            <i class="icon-google-plus-sign"></i> Sign in through google
-          <% end %>
-        </li>
-      </ul>
-    </li>
-  <% end %>
 </ul>
