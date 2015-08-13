@@ -47,6 +47,23 @@ class User < ActiveRecord::Base
     slug
   end
 
+  def avatar(opts={})
+    opts[:size] ||= 48
+
+    if avatar_url.present?
+      avatar_url
+    else
+      gravatar_id = Digest::MD5.hexdigest(email.downcase)
+      "http://gravatar.com/avatar/#{gravatar_id}.png?s=#{opts[:size]}&d=retro"
+    end
+  rescue
+    guest_avatar_url
+  end
+
+  def guest_avatar_url(opts={})
+    "images/default_avatar.jpg"
+  end
+
   class << self
     def from_omniauth(omniauth)
       auth = Authentication.find_or_create_by(
