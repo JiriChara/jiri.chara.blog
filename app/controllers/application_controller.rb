@@ -61,6 +61,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def home
+    render file: 'public/index.html', layout: false
+  end
+
 protected
   def render_404
     flash[:error] = "Not found"
