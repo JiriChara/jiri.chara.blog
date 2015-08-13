@@ -3,6 +3,8 @@ class ApiController < ActionController::Base
 
   before_action :authenticate
 
+  helper :api
+
   rescue_from CanCan::AccessDenied do |exception|
     render json: { error: 'Bad credentials' }, status: 401
   end
