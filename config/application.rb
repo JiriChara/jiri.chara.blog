@@ -34,5 +34,12 @@ module JiriCharaBlog
     config.i18n.enforce_available_locales = false
 
     config.encoding = "utf-8"
+
+    config.middleware.insert_before 0, "Rack::Cors" do
+      allow do
+        origins '*'
+        resource '*', :headers => :any, :methods => [:get, :post, :options]
+      end
+    end
   end
 end

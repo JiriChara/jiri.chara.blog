@@ -65,6 +65,8 @@ gem 'twitter-bootstrap-rails', '~> 2.2.8'
 gem 'jquery-fileupload-rails'
 gem 'font-awesome-rails'
 
+gem 'rack-cors', :require => 'rack/cors'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
