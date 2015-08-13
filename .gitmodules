@@ -1,0 +1,3 @@
+[submodule "client"]
+	path = client
+	url = git@github.com:JiriChara/jiri.chara.blog.client.git
