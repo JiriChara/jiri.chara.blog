@@ -1,4 +1,0 @@
-$('#comment-<%= @comment.id.to_s %>-form').replaceWith('<%=j render(partial: 'comments/comment',
-  locals: { comment: @comment }) %>');
-
-$('#flash_messages').html('<%=j flash_message(flash) %>');

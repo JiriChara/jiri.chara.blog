@@ -1,5 +1,0 @@
-<% if can? :show, @user %>
-  <%= render partial: 'users/user_info', locals: { user: @user } %>
-<% else %>
-  <p class="icon-error">You are not allowed to see this user.</p>
-<% end %>
